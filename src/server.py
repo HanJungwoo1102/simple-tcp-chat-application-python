@@ -26,5 +26,5 @@ class Server:
 				connectionSocket.send(message.encode())
 		except KeyboardInterrupt:
 			print("Press Ctrl-C to terminate while statement")
+			connectionSocket.close()
 			pass
-		connectionSocket.close()

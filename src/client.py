@@ -9,15 +9,21 @@ class Client:
 	def start(self):
 		clientSocket = socket(AF_INET, SOCK_STREAM)
 		clientSocket.connect((self.serverName, self.serverPort))
-		while True:
-			message = input('send message: ')
 
-			encodedMessage = message.encode()
+		try:
+			while True:
+				message = input('send message: ')
 
-			clientSocket.send(encodedMessage)
+				encodedMessage = message.encode()
 
-			receivedMessage = clientSocket.recv(self.bufferSize)
+				clientSocket.send(encodedMessage)
 
-			print(receivedMessage.decode())
+				receivedMessage = clientSocket.recv(self.bufferSize)
 
-		clientSocket.close()
+				print(receivedMessage.decode())
+
+		except KeyboardInterrupt:
+			print("Press Ctrl-C to terminate while statement")
+			clientSocket.close()
+			pass
+
