@@ -7,9 +7,7 @@ class Server:
 
 	def start(self):
 		serverSocket = socket(AF_INET, SOCK_STREAM)
-
 		serverSocket.bind(('', self.port))
-
 		serverSocket.listen(1)
 
 		print("The server is ready to receive.")
@@ -18,11 +16,10 @@ class Server:
 		try:
 			while True:
 				receivedMessage = connectionSocket.recv(self.bufferSize)
-				
 				decodedMessage = receivedMessage.decode()
-
-				message = 'The number of characters: ' + str(len(decodedMessage)) + '\nThe reversed string(s): ' + ''.join(reversed(decodedMessage))
-
+				length = str(len(decodedMessage))
+				reversedMessage = ''.join(reversed(decodedMessage))
+				message = 'The number of characters: ' + length + '\nThe reversed string(s): ' + reversedMessage
 				connectionSocket.send(message.encode())
 		except KeyboardInterrupt:
 			print("Press Ctrl-C to terminate while statement")
